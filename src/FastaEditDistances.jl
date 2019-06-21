@@ -3,7 +3,6 @@ module FastaEditDistances
 using Base.Threads
 using BioSequences
 using DataFrames
-using CSV
 
 const valid_alleles = "ACGT";
 const skip_chars = "N-";

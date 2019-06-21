@@ -12,5 +12,6 @@ export get_variant_only_seqs
 include("Pileup2Consensus.jl")
 using .Pileup2Consensus
 export pileup_consensus_fasta
+export bam2pileup2consensus
 
 end # module

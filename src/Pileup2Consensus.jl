@@ -1,60 +1,28 @@
 module Pileup2Consensus
 
-#using ArgParse
 using BioSequences
 using CodecZlib
 
-#function parse_commandline()
-#    s = ArgParseSettings()
-#
-#    @add_arg_table s begin
-#        "bam"
-#            help = "Bam file. Must be sorted and indexed."
-#            required = true
-#        "ref"
-#            help = "Reference fasta. Must be bgzipped and indexed by samtools faidx."
-#            required = true
-#        "--min_ac"
-#            help = "Minimum read count of consensus allele."
-#            arg_type = Int
-#            default = 10
-#        "--min_af"
-#            help = "Minimum frequency of consensus allele."
-#            arg_type = Float64
-#            default = 0.9
-#        "--max_dp"
-#            help = "Maximum read depth; positions with higher depth are masked."
-#            arg_type = Int
-#            default = typemax(Int)
-#    end
-#
-#    return parse_args(s)
-#end
-#
-#function main()
-#    parsed_args = parse_commandline()
-#
-#    ref_filename = parsed_args["ref"]
-#    bam_filename = parsed_args["bam"]
-#
-#    check_samtools_version()
-#    cmd = `samtools mpileup -f $ref_filename $bam_filename`
-#    open(cmd) do pileup_stream
-#        open(ref_filename) do ref_stream
-#            ref_fasta = FASTA.Reader(GzipDecompressorStream(ref_stream))
-#
-#            consensus_fasta = pileup_consensus_fasta(
-#                pileup_stream, ref_fasta,
-#                parsed_args["min_ac"], parsed_args["min_af"], parsed_args["max_dp"]
-#            )
-#
-#            w = FASTA.Writer(stdout)
-#            for record in consensus_fasta
-#                write(w, record)
-#            end
-#        end
-#    end
-#end
+function bam2pileup2consensus(bam_filename, out_stream, ref_filename,
+                              min_ac, min_af, max_dp)
+    check_samtools_version()
+    cmd = `samtools mpileup -f $ref_filename $bam_filename`
+    open(cmd) do pileup_stream
+        open(ref_filename) do ref_stream
+            consensus_fasta = pileup_consensus_fasta(
+                pileup_stream,
+                # TODO: handle non gzipped case
+                FASTA.Reader(GzipDecompressorStream(ref_stream)),
+                min_ac, min_af, max_dp
+            )
+
+            w = FASTA.Writer(out_stream)
+            for record in consensus_fasta
+                write(w, record)
+            end
+        end
+    end
+end
 
 function check_samtools_version()
     open(`samtools --version`) do cmd
@@ -209,6 +177,7 @@ function get_allele(symbol, ref)
 end
 
 export pileup_consensus_fasta
+export bam2pileup2consensus
 
 #main()
 
