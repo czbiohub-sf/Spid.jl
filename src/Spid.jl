@@ -9,4 +9,8 @@ using .VariantsOnlyFasta
 export variants_only_fasta
 export get_variant_only_seqs
 
+include("Pileup2Consensus.jl")
+using .Pileup2Consensus
+export pileup_consensus_fasta
+
 end # module
