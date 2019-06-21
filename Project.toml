@@ -1,0 +1,9 @@
+name = "Spid"
+uuid = "cf28058e-93e1-11e9-072b-f12806f262ad"
+authors = ["Jack Kamm <jackkamm@gmail.com>"]
+version = "0.1.0"
+
+[deps]
+BioSequences = "7e6ae17a-c86d-528c-b3b9-7f778a29fe59"
+CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
+DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
