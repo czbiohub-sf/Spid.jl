@@ -1,0 +1,6 @@
+tmp
+Dockerfile
+docker-compose.yaml
+*~
+*/*~
+Manifest.toml

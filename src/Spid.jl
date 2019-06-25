@@ -1,5 +1,10 @@
 module Spid
 
+# Only used by script entry-points, but include them here to
+# pre-compile
+using ArgParse
+using CSV
+
 include("FastaEditDistances.jl")
 using .FastaEditDistances
 export fasta_edit_distances
