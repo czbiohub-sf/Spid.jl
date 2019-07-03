@@ -3,7 +3,7 @@ using CSV
 using Test
 using BioSequences
 
-@test fasta_edit_distances("test.fa") == CSV.read("test.dist.csv")
+@test fasta_edit_distances("test.fa", batch_size=3) == CSV.read("test.dist.csv")
 
 open("test.fa") do test_fa
     open("test.variants_only.fa") do test_variants_fa

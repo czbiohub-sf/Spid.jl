@@ -45,7 +45,7 @@ end
 function read_fasta!(fasta, names, seqs)
     for record in FASTA.Reader(fasta)
         name = FASTA.identifier(record)
-        seq = String(sequence(CharSequence, record))
+        seq = uppercase(String(sequence(CharSequence, record)))
         push!(names, name)
         push!(seqs, seq)
     end
