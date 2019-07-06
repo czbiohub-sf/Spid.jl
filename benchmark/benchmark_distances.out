@@ -1,0 +1,32 @@
+++ realpath ..
++ export JULIA_PROJECT=/data/spid/Spid.jl
++ JULIA_PROJECT=/data/spid/Spid.jl
++ julia benchmark_distances.jl
+Time to load Spid
+  9.834658 seconds (20.04 M allocations: 1.007 GiB, 5.20% gc time)
+Time to compile parallel_compute_diffs
+  1.546113 seconds (2.89 M allocations: 143.068 MiB, 14.63% gc time)
+Time to run parallel_compute_diffs with n=20, L=1000000
+  7.187422 seconds (4.03 M allocations: 324.096 MiB, 0.53% gc time)
++ julia -p 1 benchmark_distances.jl
+Time to load Spid
+ 22.777313 seconds (24.90 M allocations: 1.240 GiB, 2.96% gc time)
+Time to compile parallel_compute_diffs
+  3.773834 seconds (3.21 M allocations: 160.271 MiB, 6.37% gc time)
+Time to run parallel_compute_diffs with n=20, L=1000000
+  7.487248 seconds (127 allocations: 12.281 KiB)
++ julia -p 2 benchmark_distances.jl
+Time to load Spid
+ 22.872837 seconds (24.90 M allocations: 1.240 GiB, 3.15% gc time)
+Time to compile parallel_compute_diffs
+  3.788309 seconds (3.21 M allocations: 159.812 MiB, 6.33% gc time)
+Time to run parallel_compute_diffs with n=20, L=1000000
+  4.006536 seconds (241 allocations: 29.203 KiB)
++ julia -p 4 benchmark_distances.jl
+Time to load Spid
+ 23.147364 seconds (24.90 M allocations: 1.240 GiB, 3.14% gc time)
+Time to compile parallel_compute_diffs
+  3.820234 seconds (3.21 M allocations: 159.982 MiB, 6.36% gc time)
+Time to run parallel_compute_diffs with n=20, L=1000000
+  3.490296 seconds (471 allocations: 61.297 KiB)
++ exit
