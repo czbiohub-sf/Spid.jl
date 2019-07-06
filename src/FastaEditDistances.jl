@@ -80,7 +80,7 @@ function fasta_edit_distances(fasta_name; batch_size=100)
         end
     end
 
-    res = parallel_compute_diffs(seqs2arr(seqs), 10)
+    res = parallel_compute_diffs(seqs2arr(seqs), batch_size)
 
     Contig1 = String[]
     Contig2 = String[]
