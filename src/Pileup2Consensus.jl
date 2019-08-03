@@ -1,8 +1,3 @@
-module Pileup2Consensus
-
-using BioSequences
-using CodecZlib
-
 function bam2pileup2consensus(bam_filename, out_stream, ref_filename,
                               min_ac, min_af, max_dp)
     check_samtools_version()
@@ -174,11 +169,4 @@ function get_allele(symbol, ref)
     else
         return uppercase(symbol)
     end
-end
-
-export pileup_consensus_fasta
-export bam2pileup2consensus
-
-#main()
-
 end

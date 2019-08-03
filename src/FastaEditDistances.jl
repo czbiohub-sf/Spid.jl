@@ -1,12 +1,3 @@
-module FastaEditDistances
-
-using Base.Threads
-using BioSequences
-using DataFrames
-
-const valid_alleles = "ACGT";
-const skip_chars = "N-";
-
 function check_skip_allele(a)
     if occursin(a, skip_chars)
         return true
@@ -73,8 +64,4 @@ function fasta_edit_distances(fasta_name)
         SharedGenomeLen = results[:, 1],
         NumDiffs = results[:, 2]
     )
-end
-
-export fasta_edit_distances
-
 end

@@ -1,10 +1,3 @@
-module VariantsOnlyFasta
-
-using BioSequences
-
-const valid_alleles = "ACGT";
-const skip_chars = "N-";
-
 function get_variant_only_seqs(in_fasta)
     names = String[]
     seqs = String[]
@@ -67,9 +60,4 @@ function variants_only_fasta(in_fasta, out_fasta)
     for record in variant_only_seqs
         write(w, record)
     end
-end
-
-export get_variant_only_seqs
-export variants_only_fasta
-
 end
