@@ -22,3 +22,10 @@ open("test.pileup") do pileup_f
         end
     end
 end
+
+open("test.fa") do test_f
+    open("test.core.fa") do core_f
+        core_fa = FASTA.Reader(core_f)
+        @test get_core_only_seqs(test_f) == [rec for rec in core_fa]
+    end
+end

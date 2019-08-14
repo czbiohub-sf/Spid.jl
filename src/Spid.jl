@@ -59,6 +59,21 @@ end
 
 export filter_fasta_sites
 
+function is_core_site(column)
+    for a in column
+        if a=='N' || a=='-'
+            return false
+        end
+    end
+    return true
+end
+
+function get_core_only_seqs(in_fasta)
+    return filter_fasta_sites(in_fasta, is_core_site)
+end
+
+export get_core_only_seqs
+
 include("FastaEditDistances.jl")
 export fasta_edit_distances
 
