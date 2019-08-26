@@ -65,3 +65,5 @@ function fasta_edit_distances(fasta_name)
         NumDiffs = results[:, 2]
     )
 end
+
+export fasta_edit_distances

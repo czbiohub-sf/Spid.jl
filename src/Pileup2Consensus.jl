@@ -170,3 +170,6 @@ function get_allele(symbol, ref)
         return uppercase(symbol)
     end
 end
+
+export pileup_consensus_fasta
+export bam2pileup2consensus
