@@ -25,5 +25,6 @@ end
 include("FastaEditDistances.jl")
 include("FilterFastaSites.jl")
 include("Pileup2Consensus.jl")
+include("Align.jl")
 
 end # module
