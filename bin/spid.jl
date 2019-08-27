@@ -11,38 +11,48 @@ s = ArgParseSettings()
     "align_assembly"
     help = "Align assembly with minimap2 & generate re-aligned fasta."
     action = :command
+
+    "merge_alignments"
+    help = "Merge multiple alignments and compute summaries."
+    action = :command
 end
 
 @add_arg_table s["align_short_reads"] begin
     "out_prefix"
-        help = "Prefix for output files"
-        arg_type = String
-        required = true
+    help = "Prefix for output files"
+    arg_type = String
+    required = true
+
     "ref"
-        help = "Reference fasta. Must be bgzipped and indexed by samtools faidx."
-        arg_type = String
-        required = true
+    help = "Reference fasta. Must be bgzipped and indexed by samtools faidx."
+    arg_type = String
+    required = true
+
     "fastqs"
-        help = "Fastq files to align to reference."
-        nargs = '+'
-        arg_type = String
-        required = true
+    help = "Fastq files to align to reference."
+    nargs = '+'
+    arg_type = String
+    required = true
+
     "--min_ac"
-        help = "Minimum read count of consensus allele."
-        arg_type = Int
-        default = 10
+    help = "Minimum read count of consensus allele."
+    arg_type = Int
+    default = 10
+
     "--min_af"
-        help = "Minimum frequency of consensus allele."
-        arg_type = Float64
-        default = 0.9
+    help = "Minimum frequency of consensus allele."
+    arg_type = Float64
+    default = 0.9
+
     "--max_dp"
-        help = "Maximum read depth; positions with higher depth are masked."
-        arg_type = Int
-        default = typemax(Int)
+    help = "Maximum read depth; positions with higher depth are masked."
+    arg_type = Int
+    default = typemax(Int)
+
     "--threads"
-        help = "Threads. Note: currently only used in alignment stage, but not in the pileup stage."
-        arg_type = Int
-        default = 3
+    help = "Threads. Note: currently only used in alignment stage, but not in the pileup stage."
+    arg_type = Int
+    default = 3
 end
 
 @add_arg_table s["align_assembly"] begin
@@ -87,6 +97,23 @@ end
     default = 3
 end
 
+@add_arg_table s["merge_alignments"] begin
+    "out_prefix"
+    help = "Prefix for output files"
+    arg_type = String
+    required = true
+
+    "fastas"
+    help = "Fasta files to merge."
+    nargs = '+'
+    arg_type = String
+    required = true
+
+    "--fasta2sample_regex"
+    help = "Regex for fasta path. Sample name is the first capturing group."
+    default = "(?:.*/)?([^/]*)\\.fa"
+end
+
 
 parsed_args = parse_args(s)
 cmd = parsed_args["%COMMAND%"]
@@ -112,6 +139,14 @@ elseif cmd == "align_assembly"
         preset=parsed_args["preset"], min_ac=parsed_args["min_ac"],
         min_af=parsed_args["min_af"], max_dp=parsed_args["max_dp"],
         threads=parsed_args["threads"]
+    )
+elseif cmd == "merge_alignments"
+    parsed_args = parsed_args[cmd]
+
+    merge_and_summarize_sample_fastas(
+        parsed_args["out_prefix"],
+        parsed_args["fastas"],
+        Regex(parsed_args["fasta2sample_regex"])
     )
 else
     println("Unrecognized command $cmd")

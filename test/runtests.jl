@@ -3,15 +3,6 @@ using CSV
 using Test
 using BioSequences
 
-@test fasta_edit_distances("test.fa") == CSV.read("test.dist.csv")
-
-open("test.fa") do test_fa
-    open("test.variants_only.fa") do test_variants_fa
-        @test get_variant_only_seqs(test_fa) == [
-            rec for rec in FASTA.Reader(test_variants_fa)]
-    end
-end
-
 open("test.pileup") do pileup_f
     open("test.pileup.ref.fa") do ref_f
         open("test.pileup.out.fa") do out_f
@@ -23,9 +14,20 @@ open("test.pileup") do pileup_f
     end
 end
 
-open("test.fa") do test_f
-    open("test.core.fa") do core_f
-        core_fa = FASTA.Reader(core_f)
-        @test get_core_only_seqs(test_f) == [rec for rec in core_fa]
+rm("scratch", force=true, recursive=true)
+mkdir("scratch")
+
+merge_and_summarize_sample_fastas(
+    "scratch/test", ["Sample1.fa", "Sample2.fa", "Sample3.fa"],
+    Regex("(?:.*/)?([^/]*)\\.fa")
+)
+
+for fname in ["test.fa", "test.core.fa",
+              "test.variantsOnly.fa", "test.core.variantsOnly.fa",
+              "test.fa.pairwise_diffs.csv", "test.core.fa.pairwise_diffs.csv"]
+    open(fname) do f1
+        open("scratch/$fname") do f2
+            @test read(f1, String) == read(f2, String)
+        end
     end
 end

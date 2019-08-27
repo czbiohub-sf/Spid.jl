@@ -1,0 +1,4 @@
+Contig1,Contig2,SharedGenomeLen,NumDiffs
+Sample1,Sample2,5,1
+Sample1,Sample3,5,1
+Sample2,Sample3,5,2
