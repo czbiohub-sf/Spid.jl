@@ -36,7 +36,7 @@ function concat_fasta_contigs(fasta_path)
     end
 end
 
-function merge_sample_fastas(samples, in_fastas, out_fasta)
+function combine_sample_fastas(samples, in_fastas, out_fasta)
     # TODO check that fastas have same contig names and lengths
     open(out_fasta, "w") do f
         w = FASTA.Writer(f)
@@ -47,7 +47,7 @@ function merge_sample_fastas(samples, in_fastas, out_fasta)
     end
 end
 
-function merge_and_summarize_sample_fastas(
+function merge_alignments(
     out_prefix, fastas, samples)
 
     samples_dict = Dict{String, String}()
@@ -58,7 +58,7 @@ function merge_and_summarize_sample_fastas(
     end
 
     merged_fa = "$out_prefix.fa"
-    merge_sample_fastas(samples, fastas, merged_fa)
+    combine_sample_fastas(samples, fastas, merged_fa)
     CSV.write("$out_prefix.fa.pairwise_diffs.csv",
               fasta_edit_distances(merged_fa))
 
@@ -95,7 +95,7 @@ function merge_and_summarize_sample_fastas(
     end
 end
 
-export merge_and_summarize_sample_fastas
+export merge_alignments
 
 include("FastaEditDistances.jl")
 include("FilterFastaSites.jl")

@@ -13,7 +13,7 @@ function minimap2consensus(
     end
 end
 
-function shortreads2consensus(
+function align_short_reads(
     ref_fasta_path, fastq_list, out_bam_path, out_fasta_path;
     min_ac=10, min_af=0.9, max_dp=typemax(Int), threads=3)
 
@@ -23,7 +23,7 @@ function shortreads2consensus(
         threads=threads)
 end
 
-function asm2consensus(
+function align_assembly(
     ref_fasta_path, asm_fasta_path, out_bam_path, out_fasta_path;
     preset="asm5", min_ac=1, min_af=1, max_dp=1, threads=3)
 
@@ -33,5 +33,5 @@ function asm2consensus(
         threads=threads)
 end
 
-export shortreads2consensus
-export asm2consensus
+export align_short_reads
+export align_assembly

@@ -17,7 +17,7 @@ end
 rm("scratch", force=true, recursive=true)
 mkdir("scratch")
 
-merge_and_summarize_sample_fastas(
+merge_alignments(
     "scratch/test", ["Sample1.fa", "Sample2.fa", "Sample3.fa"],
     Regex("(?:.*/)?([^/]*)\\.fa")
 )

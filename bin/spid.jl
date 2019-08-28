@@ -121,7 +121,7 @@ cmd = parsed_args["%COMMAND%"]
 if cmd == "align_short_reads"
     parsed_args = parsed_args[cmd]
 
-    shortreads2consensus(
+    align_short_reads(
         parsed_args["ref"], parsed_args["fastqs"],
         string(parsed_args["out_prefix"], ".bam"),
         string(parsed_args["out_prefix"], ".fa"),
@@ -132,7 +132,7 @@ if cmd == "align_short_reads"
 elseif cmd == "align_assembly"
     parsed_args = parsed_args[cmd]
 
-    asm2consensus(
+    align_assembly(
         parsed_args["ref"], parsed_args["query"],
         string(parsed_args["out_prefix"], ".bam"),
         string(parsed_args["out_prefix"], ".fa"),
@@ -143,7 +143,7 @@ elseif cmd == "align_assembly"
 elseif cmd == "merge_alignments"
     parsed_args = parsed_args[cmd]
 
-    merge_and_summarize_sample_fastas(
+    merge_alignments(
         parsed_args["out_prefix"],
         parsed_args["fastas"],
         Regex(parsed_args["fasta2sample_regex"])
