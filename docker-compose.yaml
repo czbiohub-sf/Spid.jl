@@ -1,5 +1,5 @@
 version: '3'
 services:
   spid:
-    image: jackkamm/spid:0.2.0
+    image: jackkamm/spid:0.3.0
     build: .
