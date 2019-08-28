@@ -4,19 +4,21 @@ This package implements a simple alignment and SNP-calling pipeline
 for detecting viral and bacterial infectious disease outbreak
 clusters.
 
-## Dependencies
-
-- minimap2 >= 2.15
-- samtools >= 1.9
-- julia >= 1.0
-
 ## Installation
 
 The easiest way to use spid is through the docker container `czbiohub/spid`.
 
-To manually install spid, first install the dependencies, then add the
-top-level folder as a local julia package. You can do this by typing
-`]` and then `add .` in julia.
+### Manual installation
+
+If you prefer to manually install spid instead of using the docker
+container, install the dependencies below, then add the top-level
+folder as a local julia package. You can do this by typing `]` and
+then `add .` in julia.
+
+Dependencies:
+- minimap2 >= 2.15
+- samtools >= 1.9
+- julia >= 1.0
 
 ## Usage
 
