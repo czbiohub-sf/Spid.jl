@@ -16,7 +16,7 @@ end
 """
     align_short_reads(ref_fasta_path, fastq_list, out_bam_path, out_fasta_path; <keyword arguments>)
 
-Align short reads against a reference, and produce a consensus FASTA.
+Align short reads with minimap2 & generate consensus FASTA.
 
 Reads are aligned using `minimap2` with preset "sr". To generate a
 consensus FASTA, a pileup is generated with `samtools mpileup`, and
@@ -49,7 +49,7 @@ end
 """
     align_assembly(ref_fasta_path, asm_fasta_path, out_bam_path, out_fasta_path; <keyword arguments>)
 
-Align assembled FASTA against a reference.
+Align assembly with minimap2 & generate re-aligned FASTA.
 
 Reads are aligned using `minimap2` (see keyword arguments for
 settings). Then, a pileup is generated with `samtools mpileup`, and

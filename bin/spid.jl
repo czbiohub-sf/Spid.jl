@@ -13,7 +13,7 @@ s = ArgParseSettings()
     action = :command
 
     "merge_alignments"
-    help = "Merge multiple alignments and compute summaries."
+    help = "Merge several samples into a combined fasta and compute distance matrix."
     action = :command
 end
 
