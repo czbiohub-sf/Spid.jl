@@ -12,7 +12,7 @@ clusters.
 
 ## Installation
 
-The easiest way to use spid is through the docker container TODO.
+The easiest way to use spid is through the docker container `czbiohub/spid`.
 
 To manually install spid, first install the dependencies, then add the
 top-level folder as a local julia package. You can do this by typing
@@ -31,8 +31,26 @@ There are 3 main commands:
   compute pairwise distances between samples.
 
 To see the help for these functions, run
-`bin/spid.jl [command] --help` from the commandline, or
+`bin/spid.jl [command] --help` from the command line, or
 `?{command}` within julia.
+
+### Running through docker
+
+First pull the image from dockerhub:
+```{sh}
+docker pull czbiohub/spid:<version>
+```
+
+To run the command-line utility, with the current directory mounted
+with the docker image at `/data`, do:
+```{sh}
+docker run czbiohub/spid -v $PWD:/data spid.jl [...]
+```
+
+To run julia through the docker container, with the current directory mounted at `/data`, do:
+```{sh}
+docker run -it czbiohub/spid -v $PWD:/data julia
+```
 
 ## Implementation Details
 

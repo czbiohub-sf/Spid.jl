@@ -6,8 +6,9 @@ RUN apt-get update && \
         mkdir -p $JULIA_DEPOT_PATH
 
 ENV JULIA_PROJECT=/opt/Spid.jl
-COPY . $JULIA_PROJECT
-COPY bin/* /usr/local/bin/
+COPY src/*.jl $JULIA_PROJECT/src/
+COPY Project.toml $JULIA_PROJECT/
+COPY bin/spid.jl /usr/local/bin/
 RUN julia -O3 -e 'using Pkg; Pkg.instantiate(); using Spid' && \
         # change permissions AFTER installing julia packages
         chmod -R a+rw /opt/julia
