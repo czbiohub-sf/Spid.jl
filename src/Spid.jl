@@ -47,6 +47,32 @@ function combine_sample_fastas(samples, in_fastas, out_fasta)
     end
 end
 
+"""
+    merge_alignments(out_prefix, fastas, samples)
+
+Merge several samples into a combined FASTA and compute distance matrix.
+
+Outputs the following FASTA files:
+- `{out_prefix}.fa`: all sites
+- `{out_prefix}.core.fa`: core sites only (no missing alleles)
+- `{out_prefix}.variantsOnly.fa`: variant sites only
+- `{out_prefix}.core.variantsOnly.fa`: core variants only
+
+Also outputs pairwise distances in the following CSV files:
+- `{out_prefix}.fa.pairwise_diffs.csv`: all sites
+- `{out_prefix}.core.fa.pairwise_diffs.csv`: core sites only
+
+`fastas` should be a list of FASTA filenames aligned against the same
+reference, e.g. via [`align_short_reads`](@ref) or
+[`align_assembly`](@ref). They should have the same number of contigs,
+with the same lengths, in the same order. The contig names are
+ignored. The contigs for each sample are concatenated into a
+single sequence in the output FASTA.
+
+`samples` should be either a list of the sample names, or a `Regex`
+for extracting a sample name from the FASTA filename; in particular,
+the first capturing group of the regex is taken as the sample name.
+"""
 function merge_alignments(
     out_prefix, fastas, samples)
 
