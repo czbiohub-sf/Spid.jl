@@ -44,7 +44,7 @@ docker pull czbiohub/spid:<version>
 ```
 
 To run the command-line utility, with the current directory mounted
-with the docker image at `/data`, do:
+at `/data` inside the docker image, do:
 ```{sh}
 docker run czbiohub/spid -v $PWD:/data spid.jl [...]
 ```
