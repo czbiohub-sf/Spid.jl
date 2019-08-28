@@ -10,20 +10,21 @@ The easiest way to use spid is through the docker container `czbiohub/spid`.
 
 ### Manual installation
 
-If you prefer to manually install spid instead of using the docker
-container, install the dependencies below, then add the top-level
-folder as a local julia package. You can do this by typing `]` and
-then `add .` in julia.
+If you prefer not to use the docker container, you can manually
+install as follows:
 
-Dependencies:
-- minimap2 >= 2.15
-- samtools >= 1.9
-- julia >= 1.0
+1. Install dependencies:
+   - minimap2 >= 2.15
+   - samtools >= 1.9
+   - julia >= 1.0
+2. Add the top-level folder as a local julia package
+   - You can do this by typing `]` and then `add .` in julia
+3. (Optional) Add the executable `bin/spid.jl` to your $PATH.
 
 ## Usage
 
 Spid can be run from julia by importing it with `using Spid`, or from
-the command-line as `bin/spid.jl [command]`.
+the command-line as `spid.jl [command]`.
 
 There are 3 main commands:
 - `align_short_reads`: Align short reads against a reference.
@@ -33,7 +34,7 @@ There are 3 main commands:
   compute pairwise distances between samples.
 
 To see the help for these functions, run
-`bin/spid.jl [command] --help` from the command line, or
+`spid.jl [command] --help` from the command line, or
 `?{command}` within julia.
 
 ### Running through docker
