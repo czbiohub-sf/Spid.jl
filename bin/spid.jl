@@ -1,6 +1,5 @@
 #!/usr/bin/env julia
 using ArgParse
-using Spid
 
 s = ArgParseSettings()
 @add_arg_table s begin
@@ -117,6 +116,9 @@ end
 
 parsed_args = parse_args(s)
 cmd = parsed_args["%COMMAND%"]
+
+# import Spid at the end, in case we're just calling --help
+using Spid
 
 if cmd == "align_short_reads"
     parsed_args = parsed_args[cmd]
