@@ -24,7 +24,7 @@ end
     required = true
 
     "ref"
-    help = "Reference fasta. Must be bgzipped and indexed by samtools faidx."
+    help = "Reference fasta. Must be gzipped and indexed by samtools faidx."
     arg_type = String
     required = true
 
@@ -62,7 +62,7 @@ end
     required = true
 
     "ref"
-    help = "Reference fasta. Must be bgzipped and indexed by samtools faidx."
+    help = "Reference fasta. Must be gzipped and indexed by samtools faidx."
     arg_type = String
     required = true
 
