@@ -99,12 +99,21 @@ function merge_alignments(
     end
 
     core_fa = "$out_prefix.core.fa"
+    core_seqs = Vector{FASTA.Record}()
     open(merged_fa) do in_f
-        open(core_fa, "w") do out_f
-            w = FASTA.Writer(out_f)
-            for record in get_core_only_seqs(in_f)
-                write(w, record)
-            end
+        core_seqs = get_core_only_seqs(in_f)
+    end
+
+    if (length(core_seqs) == 0 ||
+        length(sequence(CharSequence, core_seqs[1])) == 0)
+        @warn "Core genome appears to be empty; skipping core genome outputs."
+        return
+    end
+
+    open(core_fa, "w") do out_f
+        w = FASTA.Writer(out_f)
+        for record in core_seqs
+            write(w, record)
         end
     end
     CSV.write("$out_prefix.core.fa.pairwise_diffs.csv",

@@ -31,3 +31,9 @@ for fname in ["test.fa", "test.core.fa",
         end
     end
 end
+
+# test empty core genome doesn't crash
+merge_alignments(
+    "scratch/test", ["Sample1.fa", "Sample2.fa", "Sample3.fa", "SampleN.fa"],
+    Regex("(?:.*/)?([^/]*)\\.fa")
+)
