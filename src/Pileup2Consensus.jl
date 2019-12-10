@@ -21,17 +21,19 @@ end
 
 function check_samtools_version()
     open(`samtools --version`) do cmd
-        version = match(r"samtools (\d+\.\d+)", readline(cmd)).captures[1]
-        version = parse(Float64, version)
-        min_version = 1.4
-        recommended_version = 1.9
-        if version < min_version
+        version = match(r"samtools (\d+)\.(\d+)", readline(cmd))
+        major = parse(Float64, version.captures[1])
+        minor = parse(Float64, version.captures[2])
+        min_major = 1
+        min_minor = 4
+        recommended_version = "1.9"
+        if major < min_major || (major == min_major && minor < min_minor)
             throw(ErrorException(string(
                 "samtools version $version too low.",
                 " samtools>=$min_version required;",
                 " samtools>=$recommended_version recommended.")))
-        elseif version < recommended_version
-            @warn "samtools=$version. samtools>=$recommended_version recommended."
+        elseif "$major.$minor" != recommended_version
+            @warn "samtools=$major.$minor. samtools=$recommended_version recommended."
         end
     end
 end
