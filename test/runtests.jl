@@ -22,9 +22,13 @@ merge_alignments(
     Regex("(?:.*/)?([^/]*)\\.fa")
 )
 
+align_assembly("MT-human.fa.gz", "MT-orang.fa",
+               "scratch/aln.bam", "scratch/aln.fa"; preset="asm20")
+
 for fname in ["test.fa", "test.core.fa",
               "test.variantsOnly.fa", "test.core.variantsOnly.fa",
-              "test.fa.pairwise_diffs.csv", "test.core.fa.pairwise_diffs.csv"]
+              "test.fa.pairwise_diffs.csv", "test.core.fa.pairwise_diffs.csv",
+              "aln.fa"]
     open(fname) do f1
         open("scratch/$fname") do f2
             @test read(f1, String) == read(f2, String)
