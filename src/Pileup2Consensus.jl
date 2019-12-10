@@ -4,10 +4,14 @@ function bam2pileup2consensus(bam_filename, out_stream, ref_filename,
     cmd = `samtools mpileup -f $ref_filename $bam_filename`
     open(cmd) do pileup_stream
         open(ref_filename) do ref_stream
+            if endswith(ref_filename, ".gz")
+                reader = FASTA.Reader(GzipDecompressorStream(ref_stream))
+            else
+                reader = FASTA.Reader(ref_stream)
+            end
+
             consensus_fasta = pileup_consensus_fasta(
-                pileup_stream,
-                # TODO: handle non gzipped case
-                FASTA.Reader(GzipDecompressorStream(ref_stream)),
+                pileup_stream, reader,
                 min_ac, min_af, max_dp
             )
 
