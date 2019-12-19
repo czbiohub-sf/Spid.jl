@@ -1,8 +1,8 @@
-FROM debian:unstable-20190812
+FROM debian:unstable-20191118
 
 ENV JULIA_DEPOT_PATH=/opt/julia
 RUN apt-get update && \
-        apt-get install -y julia samtools minimap2 curl && \
+        apt-get install -y julia samtools minimap2 curl procps && \
         mkdir -p $JULIA_DEPOT_PATH
 
 ENV JULIA_PROJECT=/opt/Spid.jl
