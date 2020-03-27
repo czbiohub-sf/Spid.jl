@@ -121,6 +121,9 @@ function count_alleles!(allele_counter, allele_array)
     end
     dp = 0
     for a in allele_array
+        if !haskey(allele_counter, a)
+            a = 'N'
+        end
         allele_counter[a] += 1
         dp += 1
     end
