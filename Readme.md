@@ -47,12 +47,12 @@ docker pull czbiohub/spid:<version>
 To run the command-line utility, with the current directory mounted
 at `/data` inside the docker image, do:
 ```{sh}
-docker run czbiohub/spid -v $PWD:/data spid.jl [...]
+docker run -v $PWD:/data czbiohub/spid spid.jl [...]
 ```
 
 To run julia through the docker container, with the current directory mounted at `/data`, do:
 ```{sh}
-docker run -it czbiohub/spid -v $PWD:/data julia
+docker run -it -v $PWD:/data czbiohub/spid julia
 ```
 
 ## Implementation Details
