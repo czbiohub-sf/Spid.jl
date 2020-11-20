@@ -28,7 +28,7 @@ function filter_fasta_sites(in_fasta, filter_fun)
     end
 
     return [
-        FASTA.Record(name, CharSequence(join(seq)))
+        FASTA.Record(name, LongCharSeq(join(seq)))
         for (name, seq) in zip(names, new_seqs)
     ]
 end

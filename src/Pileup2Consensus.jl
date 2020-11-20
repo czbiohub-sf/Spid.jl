@@ -64,7 +64,7 @@ function pileup_consensus_fasta(pileup_stream, ref_fasta,
     end
 
     return [
-        FASTA.Record(name, CharSequence(join(seq)))
+        FASTA.Record(name, LongCharSeq(join(seq)))
         for (name, seq) in consensus_seq_list
     ]
 end
@@ -91,7 +91,7 @@ function initialize_consensus_seq(ref_fasta)
     consensus_seq = []
     for record in ref_fasta
         name = FASTA.identifier(record)
-        seq = sequence(CharSequence, record)
+        seq = sequence(LongCharSeq, record)
         push!(consensus_seq, (name, ['N' for i in 1:length(seq)]))
     end
     return consensus_seq

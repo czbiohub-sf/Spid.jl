@@ -38,7 +38,7 @@ function fasta_edit_distances(fasta_name)
     open(fasta_name) do fasta
         for record in FASTA.Reader(fasta)
             name = FASTA.identifier(record)
-            seq = String(sequence(CharSequence, record))
+            seq = String(sequence(LongCharSeq, record))
             push!(names, name)
             push!(seqs, seq)
         end

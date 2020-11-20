@@ -5,6 +5,7 @@ using BioSequences
 using CodecZlib
 using DataFrames
 using CSV
+using FASTX
 
 const valid_alleles = "ACGT";
 const skip_chars = "N-";
@@ -16,7 +17,7 @@ using ArgParse
 function read_fasta!(fasta, names, seqs)
     for record in FASTA.Reader(fasta)
         name = FASTA.identifier(record)
-        seq = String(sequence(CharSequence, record))
+        seq = String(sequence(LongCharSeq, record))
         push!(names, name)
         push!(seqs, seq)
     end
@@ -30,9 +31,9 @@ function concat_fasta_contigs(fasta_path)
             stream = GzipDecompressorStream(f)
         end
         for record in FASTA.Reader(stream)
-            append!(char_seq, sequence(CharSequence, record))
+            append!(char_seq, sequence(LongCharSeq, record))
         end
-        return CharSequence(join(char_seq))
+        return LongCharSeq(join(char_seq))
     end
 end
 
@@ -105,7 +106,7 @@ function merge_alignments(
     end
 
     if (length(core_seqs) == 0 ||
-        length(sequence(CharSequence, core_seqs[1])) == 0)
+        length(sequence(LongCharSeq, core_seqs[1])) == 0)
         @warn "Core genome appears to be empty; skipping core genome outputs."
         return
     end

@@ -2,6 +2,7 @@ using Spid
 using CSV
 using Test
 using BioSequences
+using FASTX
 
 open("test.pileup") do pileup_f
     open("test.pileup.ref.fa") do ref_f
