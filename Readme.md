@@ -73,4 +73,5 @@ added (since the core genome size shrinks with sample size).
 
 This pipeline is only meant for viral and bacterial haploid
 sequences. It will not work for diploid or polyploid eukaryotic
-sequences.
+sequences, though it can also work for haploid fungal sequences
+(e.g., during infection when they are in the spore stage). 
