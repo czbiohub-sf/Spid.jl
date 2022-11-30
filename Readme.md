@@ -7,19 +7,8 @@ clusters.
 ## Installation
 
 The easiest way to use spid is through the docker container `czbiohub/spid`.
+Currently, this is the best way to run the tool so please use this option for now.
 
-### Manual installation
-
-If you prefer not to use the docker container, you can manually
-install as follows:
-
-1. Install dependencies:
-   - minimap2 >= 2.15
-   - samtools >= 1.9
-   - julia >= 1.0
-2. Add the top-level folder as a local julia package
-   - You can do this by typing `]` and then `add .` in julia
-3. (Optional) Add the executable `bin/spid.jl` to your $PATH.
 
 ## Usage
 
@@ -55,6 +44,20 @@ To run julia through the docker container, with the current directory mounted at
 docker run -it -v $PWD:/data czbiohub/spid julia
 ```
 
+
+### Manual installation
+
+If you prefer not to use the docker container, you can manually
+install as follows:
+
+1. Install dependencies:
+   - minimap2 >= 2.15
+   - samtools >= 1.9
+   - julia >= 1.0
+2. Add the top-level folder as a local julia package
+   - You can do this by typing `]` and then `add .` in julia
+3. (Optional) Add the executable `bin/spid.jl` to your $PATH.
+
 ## Implementation Details
 
 The pipeline aligns samples against a reference genome using minimap2,
@@ -74,4 +77,4 @@ added (since the core genome size shrinks with sample size).
 This pipeline is only meant for viral and bacterial haploid
 sequences. It will not work for diploid or polyploid eukaryotic
 sequences, though it can also work for haploid fungal sequences
-(e.g., during infection when they are in the spore stage). 
+(e.g., during infection when they are in the spore stage).
